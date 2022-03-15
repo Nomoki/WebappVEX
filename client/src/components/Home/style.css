@@ -1,0 +1,20 @@
+
+.head{
+    font-weight: bold;
+    color: #707070;
+}
+.headtop{
+    margin-bottom: 0px;
+    font-weight: 600;
+    color:#707070;
+}
+.pichome{
+    width: 10vw;
+    height: 10vh;
+}
+.btnset{
+    position: absolute;
+    top: 60%;
+    left: 60%;
+    
+}
