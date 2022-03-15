@@ -30,7 +30,8 @@ function Box(props) {
 function Model({ url, sx, sy, sz, px, py, pz, rx, ry, rz }, props) {
   const { scene } = useLoader(GLTFLoader, url, loader => {
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('/draco/gltf/');
+    dracoLoader.setDecoderPath('../../../node_modules/three/examples/js/libs/draco/gltf/');
+    dracoLoader.setDecoderConfig({ type: 'js' });
     loader.setDRACOLoader(dracoLoader);
   })
   const setTarget = useStore((state) => state.setTarget)
@@ -67,9 +68,11 @@ const Exhibition = () => {
       <directionalLight position={[10, 10, 5]} intensity={2} />
       <directionalLight position={[-10, -10, -5]} intensity={1} />
 
-      {transforms.map((trans) => (
+      {/* {transforms.map((trans) => (
         <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
-      ))}
+      ))} */}
+
+      <Model url="/kajard.glb" sx={1} sy={1} sz={1}  px={0} py={0} pz={0} rx={0} ry={0} rz={0} />
 
       {target && <TransformControls object={target} mode={mode} />}
       <OrbitControls makeDefault />
