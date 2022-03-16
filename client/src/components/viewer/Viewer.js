@@ -29,8 +29,8 @@ function Box(props) {
 function Model({ url, sx, sy, sz, px, py, pz, rx, ry, rz }, props) {
   const { scene } = useLoader(GLTFLoader, url, loader => {
     const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('../../../node_modules/three/examples/js/libs/draco/gltf/');
     dracoLoader.setDecoderConfig({ type: 'js' });
-    dracoLoader.setDecoderPath('/draco/gltf/');
     loader.setDRACOLoader(dracoLoader);
   });
   const setTarget = useStore((state) => state.setTarget)
