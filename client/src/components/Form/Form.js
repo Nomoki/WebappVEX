@@ -50,7 +50,7 @@ const Form = ({ currentId, setCurrentId }) => {
       dispatch(updateTrans(currentId, { ...transData, name: user?.result?.name }));
       clear();
     }
-    history.push('/viewer');
+    history.push('/exhibition');
   };
 
   const sroravit = (e) => {
