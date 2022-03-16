@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography, Paper } from '@material-ui/core';
+import { TextField, Button, Typography, Paper, Grid, styled } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import { useHistory } from 'react-router-dom';
 import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
 import { createTrans, updateTrans } from '../../actions/transforms';
+import scene1pic from './barney.png';
 
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
@@ -16,7 +24,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
-  const history = useHistory(); 
+  const history = useHistory();
 
   useEffect(() => {
     if (post) setPostData(post);
@@ -25,7 +33,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const clear = () => {
     setCurrentId(0);
-    setPostData({title: '', message: '', tags: '', selectedFile: '' });
+    setPostData({ title: '', message: '', tags: '', selectedFile: '' });
     setTransData({ Objnum: '1', TransX: '0', TransY: '0', TransZ: '0', RotateX: '0', RotateY: '0', RotateZ: '0', ScaleX: '1', ScaleY: '1', ScaleZ: '1' });
   };
 
@@ -46,17 +54,17 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const sroravit = (e) => {
     e.preventDefault();
-    setTransData({...transData, Objnum: '1' });
+    setTransData({ ...transData, Objnum: '1' });
   }
 
   const sroravit2 = (e) => {
     e.preventDefault();
-    setTransData({...transData, Objnum: '2' });
+    setTransData({ ...transData, Objnum: '2' });
 
   }
 
-  if(!user?.result?.name ){
-    return(
+  if (!user?.result?.name) {
+    return (
       <Paper className={classes.paper}>
         <Typography variant="h6" align="center">
           Please Sign In to create your workspace.
@@ -73,10 +81,30 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField name="message" variant="outlined" label="Message" fullWidth multiline rows={4} value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
         <TextField name="tags" variant="outlined" label="Tags (coma separated)" fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
         <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
-        <div>
-        <Typography variant="h6">Select Scene</Typography>
-        <Button variant="contained" color="primary" size="large" type="button" onClick={sroravit} >Scene 1</Button>
-        <Button variant="contained" color="primary" size="large" type="button" onClick={sroravit2} >Scene 2</Button>
+        <div className={classes.selsec}>
+
+
+
+          <Typography variant="h5">Select Scene</Typography>
+          <br />
+          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid item xs={6}>
+              <Item>
+
+                <Typography variant="h7">Scene 1</Typography><br />
+                <Button variant="contained" color="primary" size="large" type="button" onClick={sroravit}><img src={scene1pic} /></Button>
+
+              </Item>
+            </Grid>
+
+            <Grid item xs={6}>
+              <Item>
+                <Typography variant="h7">Scene 2</Typography><br />
+                <Button variant="contained" color="primary" size="large" type="button" onClick={sroravit2} ><img src={scene1pic} /></Button>
+              </Item>
+            </Grid>
+          </Grid>
+          <br/>
         </div>
         <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth >Submit</Button>
         <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
