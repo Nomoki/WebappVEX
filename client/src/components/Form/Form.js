@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography, Paper, Grid, styled } from '@material-ui/core';
+import { TextField, Button, Typography, Paper, Grid, styled,Checkbox } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import { useHistory } from 'react-router-dom';
@@ -16,6 +16,8 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
@@ -91,7 +93,7 @@ const Form = ({ currentId, setCurrentId }) => {
           <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <Grid item xs={6}>
               <Item>
-
+                <Checkbox {...label}/>
                 <Typography variant="h7">Scene 1</Typography><br />
                 <Button variant="text" color="primary" size="large" type="button" onClick={sroravit}><img src={scene1pic} className={classes.picscence}/></Button>
 
@@ -100,6 +102,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
             <Grid item xs={6}>
               <Item>
+                <Checkbox {...label}/>
                 <Typography variant="h7">Scene 2</Typography><br />
                 <Button variant="text" color="primary" size="large" type="button" onClick={sroravit2} ><img src={scene2pic} className={classes.picscence2}/></Button>
               </Item>
