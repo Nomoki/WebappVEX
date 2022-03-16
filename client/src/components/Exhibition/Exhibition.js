@@ -72,7 +72,7 @@ const Exhibition = () => {
         <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
       ))} */}
 
-      <Model url="/kajard.glb" sx={1} sy={1} sz={1}  px={0} py={0} pz={0} rx={0} ry={0} rz={0} />
+      {/* <Model url="/kajard.glb" sx={1} sy={1} sz={1}  px={0} py={0} pz={0} rx={0} ry={0} rz={0} /> */}
 
       {target && <TransformControls object={target} mode={mode} />}
       <OrbitControls makeDefault />

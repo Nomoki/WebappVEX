@@ -111,8 +111,8 @@ const Form = ({ currentId, setCurrentId }) => {
         <div className={classes.selsec}>
           <br/>
         </div>
-        <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth >Submit</Button>
-        <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
+        <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" >Submit</Button><br/>
+        <Button variant="outlined" color="secondary" size="small" onClick={clear}>Clear</Button>
       </form>
     </Paper>
   );
