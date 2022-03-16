@@ -11,7 +11,7 @@ export default makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   form: {
-  
+    textAlign: 'center',
     justifyContent: 'center',
   },
   fileInput: {
@@ -23,5 +23,11 @@ export default makeStyles((theme) => ({
   },
   selsec:{
     
+  },
+  picscence:{
+    width: '80%'
+  },
+  picscence2:{
+    width: '74.7%'
   },
 }));
