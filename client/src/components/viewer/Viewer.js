@@ -41,47 +41,32 @@ function Model({ url, sx, sy, sz, px, py, pz, rx, ry, rz }, props) {
   return <primitive object={scene} dispose={null} scale={[sx, sy, sz]} position={[px, py, pz]} rotation={[rx, ry, rz]} {...props} onClick={(e) => {e.stopPropagation(); setTarget(e.object);}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}/>
 }
 
-function Tool() {
-  
-  return(
-  <div className = 'space'>
-      <Button color='secondary' variant='contained' onClick={Model}>Model</Button>
-      <Button color='secondary' variant='contained' onClick={Model}>Save</Button>
-      <Button color='secondary' variant='contained' onClick={Model}>load</Button>
-  </div>
-  )
-}
-
 const Viewer = () => {
   const { target, setTarget } = useStore()
-  const { mode } = useControls({ mode: { value: 'translate', options: ['translate', 'rotate', 'scale'] } })
   const transforms = useSelector((state) => state.transforms);
   const dispatch = useDispatch();
 
   console.log(transforms);
   
-  useEffect(() => {
-    dispatch(getTransforms());
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getTransforms());
+  // }, [dispatch])
 
   return (
     <Fragment>
-    <Tool/>
     <Canvas dpr={[1, 2]} onPointerMissed={() => setTarget(null)} camera={{ position: [-1, 1, 5], fov: 50 }}>
       <directionalLight position={[10, 10, 5]} intensity={2} />
       <directionalLight position={[-10, -10, -5]} intensity={1} />
       <Physics>
       <Controls />
 
-      {/* {transforms.map((trans) => (
+      {transforms.map((trans) => (
         trans.Objnum === 1 ?
         <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
         : 
-        <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
-        ))} */}
+        null
+        ))}
 
-      {target && <TransformControls object={target} mode={mode} />}
-      <OrbitControls makeDefault />
       <gridHelper args={[10, 10]} />
       <Stats />
       </Physics>
