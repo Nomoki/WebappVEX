@@ -9,6 +9,8 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 import { Avatar, Button, Paper, Grid, Typography, Container,ListItemButton } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTransforms } from '../../actions/transforms'
+import Controls from "./Controls"
+import { Physics, usePlane, useBox } from "@react-three/cannon";
 
 
 
@@ -65,21 +67,24 @@ const Viewer = () => {
   return (
     <Fragment>
     <Tool/>
-    <Canvas dpr={[1, 2]} onPointerMissed={() => setTarget(null)} camera={{ position: [3, 8, 0] }}>
+    <Canvas dpr={[1, 2]} onPointerMissed={() => setTarget(null)} camera={{ position: [-1, 1, 5], fov: 50 }}>
       <directionalLight position={[10, 10, 5]} intensity={2} />
       <directionalLight position={[-10, -10, -5]} intensity={1} />
+      <Physics>
+      <Controls />
 
-      {transforms.map((trans) => (
+      {/* {transforms.map((trans) => (
         trans.Objnum === 1 ?
         <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
         : 
         <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
-        ))}
+        ))} */}
 
       {target && <TransformControls object={target} mode={mode} />}
       <OrbitControls makeDefault />
       <gridHelper args={[10, 10]} />
       <Stats />
+      </Physics>
     </Canvas>
     </Fragment>
   )
