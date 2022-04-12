@@ -5,7 +5,6 @@ import decode from 'jwt-decode';
 import * as actionType from '../../constants/actionTypes';
 import { Avatar, Typography, Container, Grow, Grid, Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-
 import useStyles from './styles';
 import { getPosts } from '../../actions/posts';
 import Posts from './Posts/Posts';
@@ -44,7 +43,6 @@ const Profile = () => {
 
         setUser(JSON.parse(localStorage.getItem('profile')))
     }, [location])
-
     return (
         <Fragment>
             <div style={{ display: "flex", justifyContent: 'start', margin: '0', backgroundColor: "#aaaaaa"}}>
@@ -67,7 +65,9 @@ const Profile = () => {
             
                 </Grow>
             </div>
-            <Button variant="contained" color="Primary" className={classes.btncreate}>Create +</Button >
+            <Button variant="contained" color="Primary" className={classes.btncreate} onClick={() => {
+                        history.push('/create')
+                    }}>Create +</Button >
         </Fragment>
     )
 }
