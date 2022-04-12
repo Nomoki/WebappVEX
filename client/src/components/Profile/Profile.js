@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 import * as actionType from '../../constants/actionTypes';
-import { Avatar, Typography, Container, Grow, Grid } from '@material-ui/core';
+import { Avatar, Typography, Container, Grow, Grid, Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
 import useStyles from './styles';
@@ -52,7 +52,7 @@ const Profile = () => {
                     <Avatar alt={user.result.name} src={user.result.imageUrl} style={{width: '15vw', height: '30vh' }}>{user.result.name.charAt(0)}</Avatar>
                 </div>
                 <div style={{margin: '1vw'}}>
-                    <Typography variant="h6">{user.result.name}</Typography>
+                    <Typography variant="h3">{user.result.name}</Typography>
                 </div>
             </div>
             <div>
@@ -64,8 +64,10 @@ const Profile = () => {
                             </Grid>
                         </Grid>
                     </Container>
+            
                 </Grow>
             </div>
+            <Button variant="contained" color="Primary" className={classes.btncreate}>Create +</Button >
         </Fragment>
     )
 }
