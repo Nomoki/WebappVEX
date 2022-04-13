@@ -83,10 +83,14 @@ const Exhibition = ({ post }) => {
           console.log(user?.result?._id),
           console.log( trans?.creator),
           console.log(trans.Objnum),
-          (user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.Objnum === 2 ?
-          <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
-          : 
-          <Model url="/morn.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
+          (() => {
+            if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.Objnum === 2) {
+              return <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
+            }
+            else if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.Objnum === 1) {
+              return <Model url="/morn.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
+            }
+          })()
           ))
       }
 
