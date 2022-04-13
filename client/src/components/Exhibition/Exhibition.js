@@ -51,15 +51,25 @@ function Tool() {
   )
 }
 
-const Exhibition = () => {
+const Exhibition = ({ post }) => {
   const { target, setTarget } = useStore()
   const { mode } = useControls({ mode: { value: 'translate', options: ['translate', 'rotate', 'scale'] } })
   const transforms = useSelector((state) => state.transforms);
+  // const tran = transforms.map((scene, index) => {
+  //   console.log("The current iteration is: " + index);
+  //   console.log("The current element is: " + scene);
+  //   console.log("\n");
+  //   return scene;
+  // });
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
     dispatch(getTransforms());
   }, [dispatch])
+
+
+
 
   return (
     <Fragment>
@@ -68,12 +78,17 @@ const Exhibition = () => {
       <directionalLight position={[10, 10, 5]} intensity={2} />
       <directionalLight position={[-10, -10, -5]} intensity={1} />
 
-      {transforms.map((trans) => (
-        trans.Objnum === 1 ?
-        <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
-        : 
-        <Model url="/morn.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
-        ))}
+      {
+        transforms.map((trans) => (
+          console.log(user?.result?._id),
+          console.log( trans?.creator),
+          console.log(trans.Objnum),
+          (user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.Objnum === 2 ?
+          <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
+          : 
+          <Model url="/morn.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
+          ))
+      }
 
       {target && <TransformControls object={target} mode={mode} />}
       <OrbitControls makeDefault />

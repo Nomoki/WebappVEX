@@ -46,11 +46,10 @@ const Viewer = () => {
   const transforms = useSelector((state) => state.transforms);
   const dispatch = useDispatch();
 
-  console.log(transforms);
   
-  // useEffect(() => {
-  //   dispatch(getTransforms());
-  // }, [dispatch])
+  useEffect(() => {
+    dispatch(getTransforms());
+  }, [dispatch])
 
   return (
     <Fragment>
@@ -61,7 +60,7 @@ const Viewer = () => {
       <Controls />
 
       {transforms.map((trans) => (
-        trans.Objnum === 1 ?
+        transforms[1].Objnum === 2 ?
         <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
         : 
         null

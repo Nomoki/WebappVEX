@@ -21,7 +21,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
-  const [transData, setTransData] = useState({ Objnum: '1', TransX: '0', TransY: '0', TransZ: '0', RotateX: '0', RotateY: '0', RotateZ: '0', ScaleX: '1', ScaleY: '1', ScaleZ: '1' });
+  const [transData, setTransData] = useState({ Objnum: '', TransX: '', TransY: '', TransZ: '', RotateX: '', RotateY: '', RotateZ: '', ScaleX: '', ScaleY: '', ScaleZ: '' });
   const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
   const pos = useSelector((state) => (currentId ? state.pos.find((message) => message._id === currentId) : null));
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const clear = () => {
     setCurrentId(0);
     setPostData({ title: '', message: '', tags: '', selectedFile: '' });
-    setTransData({ Objnum: '1', TransX: '0', TransY: '0', TransZ: '0', RotateX: '0', RotateY: '0', RotateZ: '0', ScaleX: '1', ScaleY: '1', ScaleZ: '1' });
+    setTransData({ Objnum: '', TransX: '', TransY: '', TransZ: '', RotateX: '', RotateY: '', RotateZ: '', ScaleX: '', ScaleY: '', ScaleZ: '' });
   };
 
   const handleSubmit = async (e) => {
@@ -55,16 +55,16 @@ const Form = ({ currentId, setCurrentId }) => {
     history.push('/exhibition');
   };
 
-  const sroravit = (e) => {
-    e.preventDefault();
-    setTransData({ ...transData, Objnum: '1' });
-  }
+  // const sroravit = (e) => {
+  //   e.preventDefault();
+  //   setTransData({ ...transData, Objnum: '1' });
+  // }
 
-  const sroravit2 = (e) => {
-    e.preventDefault();
-    setTransData({ ...transData, Objnum: '2' });
+  // const sroravit2 = (e) => {
+  //   e.preventDefault();
+  //   setTransData({ ...transData, Objnum: '2' });
 
-  }
+  // }
 
   if (!user?.result?.name) {
     return (
@@ -93,18 +93,18 @@ const Form = ({ currentId, setCurrentId }) => {
           <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <Grid item xs={6}>
               <Item>
-                <Checkbox {...label}/>
+                <Checkbox {...label} onChange={() => setTransData({ ...transData, Objnum: '1', TransX: '0', TransY: '0', TransZ: '0', RotateX: '0', RotateY: '0', RotateZ: '0', ScaleX: '1', ScaleY: '1', ScaleZ: '1' })}/>
                 <Typography variant="h7">Scene 1</Typography><br />
-                <Button variant="text" color="primary" size="large" type="button" onClick={sroravit}><img src={scene1pic} className={classes.picscence}/></Button>
+                <Button variant="text" color="primary" size="large" type="button" ><img src={scene1pic} className={classes.picscence}/></Button>
 
               </Item>
             </Grid>
 
             <Grid item xs={6}>
               <Item>
-                <Checkbox {...label}/>
+                <Checkbox {...label} onChange={() => setTransData({...transData, Objnum: '2', TransX: '0', TransY: '0', TransZ: '0', RotateX: '0', RotateY: '0', RotateZ: '0', ScaleX: '1', ScaleY: '1', ScaleZ: '1' })}/>
                 <Typography variant="h7">Scene 2</Typography><br />
-                <Button variant="text" color="primary" size="large" type="button" onClick={sroravit2} ><img src={scene2pic} className={classes.picscence2}/></Button>
+                <Button variant="text" color="primary" size="large" type="button"><img src={scene2pic} className={classes.picscence2}/></Button>
               </Item>
             </Grid>
           </Grid>
