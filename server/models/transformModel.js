@@ -11,6 +11,9 @@ const transformSchema = mongoose.Schema({
     scaleX: Number,
     scaleY: Number,
     scaleZ: Number,
+    creator: String,
+    name: String,
+    postId: { type: mongoose.Schema.Types.ObjectId, ref: 'PostMessage' },
    
 });
 

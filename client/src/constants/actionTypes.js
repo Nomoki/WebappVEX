@@ -9,3 +9,6 @@ export const LOGOUT = 'LOGOUT';
 export const TRANS = 'TRANS';
 export const TCREATE = 'TCREATE';
 export const TUPDATE = 'TUPDATE';
+
+export const VIEW = "VIEW";
+export const EDIT = "EDIT";

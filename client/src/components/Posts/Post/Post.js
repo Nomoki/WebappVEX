@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core/';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 
-import { deletePost } from '../../../actions/posts';
+import { createView, deletePost, exploreView } from '../../../actions/posts';
 import useStyles from './styles';
+import { useHistory } from 'react-router-dom';
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
+  const history = useHistory();
 
 
   return (
@@ -41,6 +43,24 @@ const Post = ({ post, setCurrentId }) => {
             <DeleteIcon fontSize="small" /> Delete
           </Button>
         )}
+      </CardActions>
+      <CardActions className={classes.cardActions}>
+        {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) ? (
+          <>
+          <Button size="small" color="primary" onClick={() => dispatch(createView(post._id, history))}>
+            Edit
+          </Button>
+          <Button size="small" color="primary" onClick={() => dispatch(exploreView(post._id, history))}>
+            View
+          </Button>
+          </>
+        ):
+        (
+          <Button size="small" color="primary">
+            View
+          </Button>
+        )
+      }
       </CardActions>
     </Card>
   );

@@ -46,6 +46,8 @@ const Viewer = () => {
   const transforms = useSelector((state) => state.transforms);
   const dispatch = useDispatch();
 
+  const user = JSON.parse(localStorage.getItem('profile'));
+  const selectedScene = JSON.parse(localStorage.getItem('That scene'));
   
   useEffect(() => {
     dispatch(getTransforms());
@@ -59,12 +61,23 @@ const Viewer = () => {
       <Physics>
       <Controls />
 
-      {transforms.map((trans) => (
-        transforms[1].Objnum === 2 ?
-        <Model url="/kajard.glb" sx={trans.ScaleX} sy={trans.ScaleY} sz={trans.ScaleZ}  px={trans.TransX} py={trans.TransY} pz={trans.TransZ} rx={trans.RotateX} ry={trans.RotateY} rz={trans.RotateZ} key={trans._id} />
-        : 
-        null
-        ))}
+      {
+        transforms.map((trans) => (
+          // console.log(user?.result?._id),
+          // console.log( trans?.creator),
+          // console.log(trans.Objnum),
+          console.log(trans.creator),
+          console.log(selectedScene?._id),
+          (() => {
+            if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.objnum === 2 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator)) {
+              return <Model url="/kajard.glb" sx={trans.scaleX} sy={trans.scaleY} sz={trans.scaleZ}  px={trans.transX} py={trans.transY} pz={trans.transZ} rx={trans.rotateX} ry={trans.rotateY} rz={trans.rotateZ} key={trans._id} />
+            }
+            else if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.objnum === 1 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator)) {
+              return <Model url="/morn.glb" sx={trans.scaleX} sy={trans.scaleY} sz={trans.scaleZ}  px={trans.transX} py={trans.transY} pz={trans.transZ} rx={trans.rotateX} ry={trans.rotateY} rz={trans.rotateZ} key={trans._id} />
+            }
+          })()
+          ))
+      }
 
       <gridHelper args={[10, 10]} />
       <Stats />

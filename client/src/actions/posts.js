@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, VIEW, EDIT } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
 export const getPosts = () => async (dispatch) => {
@@ -37,6 +37,30 @@ export const deletePost = (id) => async (dispatch) => {
     await api.deletePost(id);
 
     dispatch({ type: DELETE, payload: id });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const exploreView = (id, history) => async (dispatch) => {
+  try {
+     const { data } = await api.viewscene(id);
+
+    dispatch({ type: VIEW, payload: data });
+
+    history.push('/viewer');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createView = (id, history) => async (dispatch) => {
+  try {
+     const { data } = await api.editscene(id);
+
+    dispatch({ type: EDIT, payload: data });
+
+    history.push('/exhibition');
   } catch (error) {
     console.log(error);
   }

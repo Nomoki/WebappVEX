@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import PostMessage from '../models/postMessage.js';
 
 import TransformPosition from '../models/transformModel.js';
 
@@ -30,10 +31,14 @@ export const getPosition = async (req, res) => {
 export const createPosition = async (req, res) => {
     const position = req.body;
 
-    const newPosition = new TransformPosition({ ...position, creator: req.userId, createdAt: new Date().toISOString() })
+    const newPosition = new TransformPosition({ ...position, creator: req.userId, createdAt: new Date().toISOString()})
+    
 
     try {
+
         await newPosition.save();
+
+        await newPosition.populate('PostMessage');
 
         res.status(201).json(newPosition);
     } catch (error) {
@@ -43,11 +48,11 @@ export const createPosition = async (req, res) => {
 
 export const updatePosition = async (req, res) => {
     const { id } = req.params;
-    const { Objnum, TransX, TransY, TransZ, RotateX, RotateY, RotateZ, ScaleX, ScaleY, ScaleZ } = req.body;
+    const { creator, Objnum, TransX, TransY, TransZ, RotateX, RotateY, RotateZ, ScaleX, ScaleY, ScaleZ } = req.body;
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No position with id: ${id}`);
 
-    const updatedPosition = { Objnum, TransX, TransY, TransZ, RotateX, RotateY, RotateZ, ScaleX, ScaleY, ScaleZ, _id: id };
+    const updatedPosition = { creator, Objnum, TransX, TransY, TransZ, RotateX, RotateY, RotateZ, ScaleX, ScaleY, ScaleZ, _id: id };
 
     await TransformPosition.findByIdAndUpdate(id, updatedPosition, { new: true });
 
