@@ -13,7 +13,7 @@ const transformSchema = mongoose.Schema({
     scaleZ: Number,
     creator: String,
     name: String,
-    postId: { type: mongoose.Schema.Types.ObjectId, ref: 'PostMessage' },
+    post: { type: mongoose.Schema.Types.ObjectId, ref: 'postmessage' },
    
 });
 
