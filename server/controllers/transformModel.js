@@ -30,9 +30,9 @@ export const getPosition = async (req, res) => {
 
 export const createPosition = async (req, res) => {
     const position = req.body;
-    const post = PostMessage.findOne({ _id: req.params.post_id });
+    // const post = PostMessage.findOne({ _id: req.params.post_id });
 
-    const newPosition = new TransformPosition({ ...position, creator: req.userId, createdAt: new Date().toISOString(), post: post });
+    const newPosition = new TransformPosition({ ...position, creator: req.userId, createdAt: new Date().toISOString() });
 
     try {
         
