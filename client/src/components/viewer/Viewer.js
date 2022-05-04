@@ -79,6 +79,9 @@ const Viewer = () => {
           ))
       }
 
+      {/* <Model url="/coffeecup.glb" sx={1} sy={1} sz={1}  px={0} py={0} pz={0} rx={0} ry={0} rz={0} />
+      <Model url="/tree.glb" sx={2.50} sy={2.50} sz={2.50}  px={0.75} py={0.9175} pz={0.6} rx={0} ry={0} rz={0} /> */}
+
       <gridHelper args={[10, 10]} />
       <Stats />
       </Physics>

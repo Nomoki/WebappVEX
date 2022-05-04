@@ -1,4 +1,6 @@
 import mongoose from "mongoose"
+import mongooseAutoPopulate from "mongoose-autopopulate"
+import PostMessage from "./postMessage.js"
 
 const transformSchema = mongoose.Schema({
     objnum: Number,
@@ -13,9 +15,11 @@ const transformSchema = mongoose.Schema({
     scaleZ: Number,
     creator: String,
     name: String,
-    post: { type: mongoose.Schema.Types.ObjectId, ref: 'postmessage' },
+    postmessage: { type: mongoose.Schema.Types.ObjectId, ref: 'postmessage', autopopulate: true },
    
 });
+
+transformSchema.plugin(mongooseAutoPopulate);
 
 var TransformPosition = mongoose.model("position", transformSchema);
 

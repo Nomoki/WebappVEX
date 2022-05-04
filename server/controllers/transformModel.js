@@ -30,14 +30,10 @@ export const getPosition = async (req, res) => {
 
 export const createPosition = async (req, res) => {
     const position = req.body;
-    // const post = PostMessage.findOne({ _id: req.params.post_id });
-
-    const newPosition = new TransformPosition({ ...position, creator: req.userId, createdAt: new Date().toISOString() });
-
+    const newPosition = new TransformPosition({ ...position, creator: req.userId, createdAt: new Date().toISOString(), postmessage: req.lastestPost });
+    
     try {
-        
-        await newPosition.save().then(p => p.populate('post'));
-
+        await newPosition.save();
 
         res.status(201).json(newPosition);
     } catch (error) {
