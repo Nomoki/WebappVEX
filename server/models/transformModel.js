@@ -16,7 +16,6 @@ const transformSchema = mongoose.Schema({
     creator: String,
     name: String,
     postmessage: { type: mongoose.Schema.Types.ObjectId, ref: 'postmessage', autopopulate: true },
-   
 });
 
 transformSchema.plugin(mongooseAutoPopulate);

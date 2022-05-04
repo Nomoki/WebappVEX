@@ -17,5 +17,4 @@ router.get('/:post_id', getPost);
 
 
 
-
 export default router;
