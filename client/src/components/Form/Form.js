@@ -10,6 +10,7 @@ import scene1pic from './scene1.png';
 import scene2pic from './scene2.png';
 import product1pic from './product1.jpg';
 import product2pic from './product2.jpg';
+import product3pic from './product3.png';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -124,7 +125,7 @@ const Form = ({ currentId, setCurrentId }) => {
           <Typography variant="h6"><b>Select Product</b></Typography>
           <br />
           <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <Item>
                 <Checkbox {...label} defaultChecked={false}/>
                 <Typography variant="h7">Product 1</Typography><br />
@@ -133,11 +134,19 @@ const Form = ({ currentId, setCurrentId }) => {
               </Item>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <Item>
               <Checkbox {...label} defaultChecked={false} />
                 <Typography variant="h7">Product 2</Typography><br />
                 <Button variant="text" color="primary" size="large" type="button"><img src={product2pic} className={classes.picproduct2}/></Button>
+              </Item>
+            </Grid>
+
+            <Grid item xs={4}>
+              <Item>
+              <Checkbox {...label} defaultChecked={false} />
+                <Typography variant="h7">Product 3</Typography><br />
+                <Button variant="text" color="primary" size="large" type="button"><img src={product3pic} className={classes.picproduct3}/></Button>
               </Item>
             </Grid>
           </Grid>

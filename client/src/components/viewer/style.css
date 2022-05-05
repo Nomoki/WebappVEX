@@ -5,12 +5,17 @@ canvas{
 .space{
     background-color: rgb(233, 233, 233);
     width: 15%;
-    height: 70%;
+    height: 80%;
     position: absolute;
     right: 1px;
     z-index: 1;
     border-radius: 15px;
     text-align: center;
     padding-top: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    
 }
+
 

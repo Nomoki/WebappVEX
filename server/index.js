@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import compression from 'compression';
 import postRoutes from './routes/posts.js';
-import userRouter from './routes/users.js';
+import userRoutes from './routes/users.js';
 import posRoutes from './routes/transformModel.js';
 
 
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ limit: '1000mb', extended: true }))
 app.use(cors());
 
 app.use('/posts', postRoutes);
-app.use("/user", userRouter);
+app.use("/user", userRoutes);
 app.use("/pos", posRoutes);
 
 const CONNECTION_URL = 'mongodb+srv://Oaky:12af7ooM@vewafdb.s4toy.mongodb.net/vewafdb';

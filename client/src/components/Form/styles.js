@@ -35,5 +35,8 @@ export default makeStyles((theme) => ({
   },
   picproduct2:{
     width: '50%'
+  },
+  picproduct3:{
+    width: '89.25%'
   }
 }));

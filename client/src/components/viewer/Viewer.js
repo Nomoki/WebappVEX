@@ -6,11 +6,15 @@ import { useControls } from 'leva'
 import create from 'zustand'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
-import { Avatar, Button, Paper, Grid, Typography, Container,ListItemButton } from '@material-ui/core'
+import { Avatar, Button, Paper, Grid, Typography, Container,ListItemButton, styled, TextField } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTransforms } from '../../actions/transforms'
 import Controls from "./Controls"
-import { Physics, usePlane, useBox } from "@react-three/cannon";
+import { Physics, usePlane, useBox } from "@react-three/cannon"
+import useStyles from './styles';
+import product1pic from '../Form/product1.jpg'
+import product2pic from '../Form/product2.jpg'
+import product3pic from '../Form/product3.png'
 
 
 
@@ -41,6 +45,51 @@ function Model({ url, sx, sy, sz, px, py, pz, rx, ry, rz }, props) {
   return <primitive object={scene} dispose={null} scale={[sx, sy, sz]} position={[px, py, pz]} rotation={[rx, ry, rz]} {...props} onClick={(e) => {e.stopPropagation(); setTarget(e.object);}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}/>
 }
 
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+function Cart() {
+  const classes = useStyles();
+  return(
+  <>
+  <div className = 'space'>
+      <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }} alignItems="center" justify="center" className={classes.primarygrid}>
+            <Grid item xs={12} >
+              <Item>
+                <Typography variant="h7">Product 1</Typography><br />
+                <Button variant="text" color="primary" size="large" type="button" ><img src={product1pic} className={classes.picproduct1}/></Button><br/>
+                <TextField id="standard-basic" label="Count" type="number"  />
+              </Item>
+            </Grid>
+
+            {/* <Grid item xs={12}>
+              <Item>
+                <Typography variant="h7">Product 2</Typography><br />
+                <Button variant="text" color="primary" size="large" type="button"><img src={product2pic} className={classes.picproduct2}/></Button><br/>
+                <TextField id="standard-basic" label="Count" type="number"  />
+              </Item>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Item>
+                <Typography variant="h7">Product 3</Typography><br />
+                <Button variant="text" color="primary" size="large" type="button"><img src={product3pic} className={classes.picproduct3}/></Button><br/>
+                <TextField id="standard-basic" label="Count" type="number"  />
+              </Item>
+            </Grid> */}
+      </Grid>
+      <br/>
+      <Button color='primary' variant='contained' className={classes.buttoncart}>Add Cart</Button>
+  </div>
+  </>
+  )
+}
+
 const Viewer = () => {
   const { target, setTarget } = useStore()
   const transforms = useSelector((state) => state.transforms);
@@ -55,6 +104,7 @@ const Viewer = () => {
 
   return (
     <Fragment>
+    <Cart/>
     <Canvas dpr={[1, 2]} onPointerMissed={() => setTarget(null)} camera={{ position: [-1, 1, 5], fov: 50 }}>
       <directionalLight position={[10, 10, 5]} intensity={2} />
       <directionalLight position={[-10, -10, -5]} intensity={1} />
@@ -81,6 +131,7 @@ const Viewer = () => {
 
       {/* <Model url="/coffeecup.glb" sx={1} sy={1} sz={1}  px={0} py={0} pz={0} rx={0} ry={0} rz={0} />
       <Model url="/tree.glb" sx={2.50} sy={2.50} sz={2.50}  px={0.75} py={0.9175} pz={0.6} rx={0} ry={0} rz={0} /> */}
+      {/* <Model url="/vodoo.glb" sx={1} sy={1} sz={1}  px={0} py={0} pz={0} rx={0} ry={0} rz={0} /> */}
 
       <gridHelper args={[10, 10]} />
       <Stats />
