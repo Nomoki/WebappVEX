@@ -8,6 +8,8 @@ import { createPost, updatePost } from '../../actions/posts';
 import { createTrans, updateTrans } from '../../actions/transforms';
 import scene1pic from './scene1.png';
 import scene2pic from './scene2.png';
+import product1pic from './product1.jpg';
+import product2pic from './product2.jpg';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -118,6 +120,28 @@ const Form = ({ currentId, setCurrentId }) => {
             </Grid>
           </Grid>
           <br/>
+
+          <Typography variant="h6"><b>Select Product</b></Typography>
+          <br />
+          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid item xs={6}>
+              <Item>
+                <Checkbox {...label} defaultChecked={false}/>
+                <Typography variant="h7">Product 1</Typography><br />
+                <Button variant="text" color="primary" size="large" type="button" ><img src={product1pic} className={classes.picproduct1}/></Button>
+
+              </Item>
+            </Grid>
+
+            <Grid item xs={6}>
+              <Item>
+              <Checkbox {...label} defaultChecked={false} />
+                <Typography variant="h7">Product 2</Typography><br />
+                <Button variant="text" color="primary" size="large" type="button"><img src={product2pic} className={classes.picproduct2}/></Button>
+              </Item>
+            </Grid>
+          </Grid>
+        <br/>
           <Typography variant="h6">Display Image </Typography>
         <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
         <div className={classes.selsec}>

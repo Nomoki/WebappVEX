@@ -30,4 +30,10 @@ export default makeStyles((theme) => ({
   picscence2:{
     width: '74.7%'
   },
+  picproduct1:{
+    width: '50%'
+  },
+  picproduct2:{
+    width: '50%'
+  }
 }));
