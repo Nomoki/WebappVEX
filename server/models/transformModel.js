@@ -1,6 +1,9 @@
 import mongoose from "mongoose"
 import mongooseAutoPopulate from "mongoose-autopopulate"
 import PostMessage from "./postMessage.js"
+import AutoIncrementFactory from 'mongoose-sequence'
+
+const AutoIncrement = AutoIncrementFactory(mongoose);
 
 const transformSchema = mongoose.Schema({
     objnum: Number,
@@ -15,10 +18,15 @@ const transformSchema = mongoose.Schema({
     scaleZ: Number,
     creator: String,
     name: String,
-    postmessage: { type: mongoose.Schema.Types.ObjectId, ref: 'postmessage', autopopulate: true },
+    createdAt: {
+        type: Date,
+        default: new Date(),
+    },
+    postMessage: Number,
+    
 });
 
-transformSchema.plugin(mongooseAutoPopulate);
+transformSchema.plugin(AutoIncrement, {id:'postMessage_seq',inc_field: 'postMessage'});
 
 var TransformPosition = mongoose.model("position", transformSchema);
 

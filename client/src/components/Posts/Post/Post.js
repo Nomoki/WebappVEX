@@ -56,7 +56,7 @@ const Post = ({ post, setCurrentId }) => {
           </>
         ):
         (
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" onClick={() => dispatch(exploreView(post._id, history))}>
             View
           </Button>
         )

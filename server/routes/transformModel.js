@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/', getPositions);
 router.get('/:trans_id', getPosition);
-router.get('/:post_id', createPost).post('/', auth, lastestpost, createPosition);
+router.post('/', auth, createPosition);
 router.patch('/:trans_id', auth, updatePosition);
 router.delete('/:trans_id', auth, deleteTrans);
 

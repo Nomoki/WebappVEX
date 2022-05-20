@@ -15,6 +15,7 @@ import useStyles from './styles';
 import product1pic from '../Form/product1.jpg'
 import product2pic from '../Form/product2.jpg'
 import product3pic from '../Form/product3.png'
+import { getPosts } from '../../actions/posts'
 
 
 
@@ -100,6 +101,7 @@ const Viewer = () => {
   
   useEffect(() => {
     dispatch(getTransforms());
+    dispatch(getPosts());
   }, [dispatch])
 
   return (
@@ -119,10 +121,10 @@ const Viewer = () => {
           console.log(trans.creator),
           console.log(selectedScene?._id),
           (() => {
-            if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.objnum === 1 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator)) {
+            if (trans.objnum === 1 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.transformScene === trans?.postMessage) {
               return <Model url="/kajard.glb" sx={trans.scaleX} sy={trans.scaleY} sz={trans.scaleZ}  px={trans.transX} py={trans.transY} pz={trans.transZ} rx={trans.rotateX} ry={trans.rotateY} rz={trans.rotateZ} key={trans._id} />
             }
-            else if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.objnum === 2 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator)) {
+            else if (trans.objnum === 2 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.transformScene === trans?.postMessage) {
               return <Model url="/morn.glb" sx={trans.scaleX} sy={trans.scaleY} sz={trans.scaleZ}  px={trans.transX} py={trans.transY} pz={trans.transZ} rx={trans.rotateX} ry={trans.rotateY} rz={trans.rotateZ} key={trans._id} />
             }
           })()
