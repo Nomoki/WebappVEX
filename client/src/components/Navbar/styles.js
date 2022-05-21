@@ -34,4 +34,9 @@ export default makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
   },
+  cart: {
+    width: '15%',
+    height: '15%',
+  }
+
 }));

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 import useStyles from './styles';
 import * as actionType from '../../constants/actionTypes';
+import cart from "./Cart-03.png"
 
 const Navbar = () => {
     const classes = useStyles();
@@ -43,6 +44,7 @@ const Navbar = () => {
                     <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">VE</Typography>
                 </div>
                 <Toolbar className={classes.toolbar}>
+                <img src={cart} className={classes.cart}/>
                     {user ? (
                         <div className={classes.profile}>
                             <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl} onClick={() => history.push('/profile')}>{user.result.name.charAt(0)}</Avatar>
@@ -54,6 +56,7 @@ const Navbar = () => {
                     )}
                 </Toolbar>
             </AppBar>
+            
         </Fragment>
     )
 }
