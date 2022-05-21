@@ -3,7 +3,7 @@ import AutoIncrementFactory from 'mongoose-sequence'
 
 const AutoIncrement = AutoIncrementFactory(mongoose);
 
-const postSchema = mongoose.Schema({
+const sceneinfoSchema = mongoose.Schema({
     title: String,
     message: String,
     name: String,
@@ -14,11 +14,11 @@ const postSchema = mongoose.Schema({
         type: Date,
         default: new Date(),
     },
-    transformScene: Number,
+    sceneId: Number,
 })
 
-postSchema.plugin(AutoIncrement, {id:'transformScene_seq',inc_field: 'transformScene'});
+sceneinfoSchema.plugin(AutoIncrement, {id:'sceneId_seq',inc_field: 'sceneId'});
 
-var PostMessage = mongoose.model('postmessage', postSchema);
+var SceneInfo = mongoose.model('sceneinformation', sceneinfoSchema);
 
-export default PostMessage;
+export default SceneInfo;

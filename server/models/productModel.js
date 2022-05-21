@@ -5,7 +5,7 @@ import AutoIncrementFactory from 'mongoose-sequence'
 
 const AutoIncrement = AutoIncrementFactory(mongoose);
 
-const sceneSchema = mongoose.Schema({
+const productSchema = mongoose.Schema({
     objnum: Number,
     transX: Number,
     transY: Number,
@@ -22,12 +22,12 @@ const sceneSchema = mongoose.Schema({
         type: Date,
         default: new Date(),
     },
-    sceneInfomationId: Number,
+    sceneId: Number,
     
 });
 
-sceneSchema.plugin(AutoIncrement, {id:'sceneInfomationId_seq',inc_field: 'sceneInfomationId'});
+productSchema.plugin(AutoIncrement, {id:'scenesId_seq',inc_field: 'sceneId'});
 
-var ScenePosition = mongoose.model("scene", sceneSchema);
+var ProductPosition = mongoose.model("product", productSchema);
 
-export default ScenePosition;
+export default ProductPosition;

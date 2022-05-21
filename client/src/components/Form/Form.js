@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
 import { createTrans, updateTrans } from '../../actions/transforms';
+import { createTransProd, updateTransProd } from '../../actions/transformsproduct';
 import scene1pic from './scene1.png';
 import scene2pic from './scene2.png';
 import product1pic from './product1.jpg';
@@ -25,23 +26,28 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
   const [transData, setTransData] = useState({ objnum: '', transX: '', transY: '', transZ: '', rotateX: '', rotateY: '', rotateZ: '', scaleX: '', scaleY: '', scaleZ: '' });
+  const [transProductData, setTransProductData] = useState({ objnum: '', transX: '', transY: '', transZ: '', rotateX: '', rotateY: '', rotateZ: '', scaleX: '', scaleY: '', scaleZ: '' });
   const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
   const pos = useSelector((state) => (currentId ? state.pos.find((message) => message._id === currentId) : null));
+  const posProd = useSelector((state) => (currentId ? state.posprod.find((message) => message._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
   const history = useHistory();
   console.log(transData);
+  console.log(transProductData);
 
   useEffect(() => {
     if (post) setPostData(post);
     if (pos) setTransData(pos);
+    if (posProd) setTransData(posProd);
   }, [post, pos]);
 
   const clear = () => {
     setCurrentId(0);
     setPostData({ title: '', message: '', tags: '', selectedFile: '' });
     setTransData({ objnum: '', transX: '', transY: '', transZ: '', rotateX: '', rotateY: '', rotateZ: '', scaleX: '', scaleY: '', scaleZ: '' });
+    setTransProductData({ objnum: '', transX: '', transY: '', transZ: '', rotateX: '', rotateY: '', rotateZ: '', scaleX: '', scaleY: '', scaleZ: '' });
   };
 
   const handleSubmit = async (e) => {
@@ -49,11 +55,13 @@ const Form = ({ currentId, setCurrentId }) => {
 
     if (currentId === 0) {
       dispatch(createPost({ ...postData, name: user?.result?.name }));
-      dispatch(createTrans({ ...transData, name: user?.result?.name }))
+      dispatch(createTrans({ ...transData, name: user?.result?.name }));
+      dispatch(createTransProd({ ...transProductData, name: user?.result?.name }));
       clear();
     } else {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
       dispatch(updateTrans(currentId, { ...transData, name: user?.result?.name }));
+      dispatch(updateTransProd(currentId, { ...transData, name: user?.result?.name }));
       clear();
     }
     history.push('/exhibition');
@@ -127,7 +135,16 @@ const Form = ({ currentId, setCurrentId }) => {
           <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <Grid item xs={4}>
               <Item>
-                <Checkbox {...label} defaultChecked={false}/>
+                <Checkbox {...label} defaultChecked={false} onChange={(e) =>{
+                  if (e.target.checked) {
+                    setTransProductData({ ...transProductData, objnum: 1, transX: 0, transY: 1, transZ: 0, rotateX: 0, rotateY: 0, rotateZ: 0, scaleX: 2.50, scaleY: 2.50, scaleZ: 2.50 });
+                  } else {
+                    setTransProductData({ objnum: '', transX: '', transY: '', transZ: '', rotateX: '', rotateY: '', rotateZ: '', scaleX: '', scaleY: '', scaleZ: '' });
+                  }
+                  }
+                }
+                value={transProductData}
+                />
                 <Typography variant="h7">Product 1</Typography><br />
                 <Button variant="text" color="primary" size="large" type="button" ><img src={product1pic} className={classes.picproduct1}/></Button>
 
@@ -136,7 +153,16 @@ const Form = ({ currentId, setCurrentId }) => {
 
             <Grid item xs={4}>
               <Item>
-              <Checkbox {...label} defaultChecked={false} />
+              <Checkbox {...label} defaultChecked={false} onChange={(e) =>{
+                  if (e.target.checked) {
+                    setTransProductData({ ...transProductData, objnum: 2, transX: 0, transY: 1, transZ: 0, rotateX: 0, rotateY: 0, rotateZ: 0, scaleX: 0.235, scaleY: 0.235, scaleZ: 0.235 });
+                  } else {
+                    setTransProductData({ objnum: '', transX: '', transY: '', transZ: '', rotateX: '', rotateY: '', rotateZ: '', scaleX: '', scaleY: '', scaleZ: '' });
+                  }
+                  }
+                }
+                value={transProductData}
+                />
                 <Typography variant="h7">Product 2</Typography><br />
                 <Button variant="text" color="primary" size="large" type="button"><img src={product2pic} className={classes.picproduct2}/></Button>
               </Item>
@@ -144,7 +170,16 @@ const Form = ({ currentId, setCurrentId }) => {
 
             <Grid item xs={4}>
               <Item>
-              <Checkbox {...label} defaultChecked={false} />
+              <Checkbox {...label} defaultChecked={false} onChange={(e) =>{
+                  if (e.target.checked) {
+                    setTransProductData({ ...transProductData, objnum: 3, transX: 0, transY: 1, transZ: 0, rotateX: 0, rotateY: 180, rotateZ: 0, scaleX: 0.35, scaleY: 0.35, scaleZ: 0.35 });
+                  } else {
+                    setTransProductData({ objnum: '', transX: '', transY: '', transZ: '', rotateX: '', rotateY: '', rotateZ: '', scaleX: '', scaleY: '', scaleZ: '' });
+                  }
+                  }
+                }
+                value={transProductData}
+                />
                 <Typography variant="h7">Product 3</Typography><br />
                 <Button variant="text" color="primary" size="large" type="button"><img src={product3pic} className={classes.picproduct3}/></Button>
               </Item>

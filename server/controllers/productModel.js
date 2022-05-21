@@ -2,13 +2,13 @@ import express from 'express';
 import mongoose from 'mongoose';
 import PostMessage from '../models/postMessage.js';
 
-import ScenePosition from '../models/transformModel.js';
+import ProductPosition from '../models/productModel.js';
 
 const router = express.Router();
 
 export const getPositions = async (req, res) => { 
     try {
-        const transformPos = await ScenePosition.find();
+        const transformPos = await ProductPosition.find();
                 
         res.status(200).json(transformPos);
     } catch (error) {
@@ -17,10 +17,10 @@ export const getPositions = async (req, res) => {
 }
 
 export const getPosition = async (req, res) => { 
-    const { trans_id } = req.params;
+    const { transprod_id } = req.params;
 
     try {
-        const pos = await ScenePosition.findById(trans_id);
+        const pos = await ProductPosition.findById(transprod_id);
         
         res.status(200).json(pos);
     } catch (error) {
@@ -30,7 +30,7 @@ export const getPosition = async (req, res) => {
 
 export const createPosition = async (req, res) => {
     const position = req.body;
-    const newPosition = new ScenePosition({ ...position, creator: req.userId, createdAt: new Date().toISOString(), postmessage: req.lastestPost });
+    const newPosition = new ProductPosition({ ...position, creator: req.userId, createdAt: new Date().toISOString(), postmessage: req.lastestPost });
     
     try {
         await newPosition.save();
@@ -42,24 +42,24 @@ export const createPosition = async (req, res) => {
 }
 
 export const updatePosition = async (req, res) => {
-    const { trans_id } = req.params;
+    const { transprod_id } = req.params;
     const { creator, Objnum, TransX, TransY, TransZ, RotateX, RotateY, RotateZ, ScaleX, ScaleY, ScaleZ } = req.body;
     
-    if (!mongoose.Types.ObjectId.isValid(trans_id)) return res.status(404).send(`No position with id: ${trans_id}`);
+    if (!mongoose.Types.ObjectId.isValid(transprod_id)) return res.status(404).send(`No position with id: ${transprod_id}`);
 
-    const updatedPosition = { creator, Objnum, TransX, TransY, TransZ, RotateX, RotateY, RotateZ, ScaleX, ScaleY, ScaleZ, _id: trans_id };
+    const updatedPosition = { creator, Objnum, TransX, TransY, TransZ, RotateX, RotateY, RotateZ, ScaleX, ScaleY, ScaleZ, _id: transprod_id };
 
-    await ScenePosition.findByIdAndUpdate(trans_id, updatedPosition, { new: true });
+    await ProductPosition.findByIdAndUpdate(transprod_id, updatedPosition, { new: true });
 
     res.json(updatedPost);
 }
 
 export const deleteTrans = async (req, res) => {
-    const { trans_id } = req.params;
+    const { transprod_id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(trans_id)) return res.status(404).send(`No post with id: ${trans_id}`);
+    if (!mongoose.Types.ObjectId.isValid(transprod_id)) return res.status(404).send(`No post with id: ${transprod_id}`);
 
-    await ScenePosition.findByIdAndRemove(trans_id);
+    await ProductPosition.findByIdAndRemove(transprod_id);
 
     res.json({ message: "Post deleted successfully." });
 }

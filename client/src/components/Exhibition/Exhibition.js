@@ -9,6 +9,8 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 import { Avatar, Button, Paper, Grid, Typography, Container,ListItemButton } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTransforms } from '../../actions/transforms'
+import { getPosts } from '../../actions/posts'
+import { getTransformsProd } from '../../actions/transformsproduct'
 
 
 
@@ -55,12 +57,15 @@ const Exhibition = ({ post }) => {
   const { target, setTarget } = useStore()
   const { mode } = useControls({ mode: { value: 'translate', options: ['translate', 'rotate', 'scale'] } })
   const transforms = useSelector((state) => state.transforms);
+  const transformsproduct = useSelector((state) => state.transformsproduct);
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
   const selectedScene = JSON.parse(localStorage.getItem('That scene'));
 
   useEffect(() => {
     dispatch(getTransforms());
+    dispatch(getPosts());
+    dispatch(getTransformsProd());
   }, [dispatch])
 
 
@@ -79,19 +84,40 @@ const Exhibition = ({ post }) => {
           console.log( trans?.creator),
           console.log(trans.Objnum),
           (() => {
-            if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.objnum === 1 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.transformScene === trans?.postMessage) {
+            if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.objnum === 1 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.sceneId === trans?.sceneInfomationId) {
               return <Model url="/kajard.glb" sx={trans.scaleX} sy={trans.scaleY} sz={trans.scaleZ}  px={trans.transX} py={trans.transY} pz={trans.transZ} rx={trans.rotateX} ry={trans.rotateY} rz={trans.rotateZ} key={trans._id} />
             }
-            else if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.objnum === 2 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.transformScene === trans?.postMessage) {
+            else if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.objnum === 2 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.sceneId === trans?.sceneInfomationId) {
               return <Model url="/morn.glb" sx={trans.scaleX} sy={trans.scaleY} sz={trans.scaleZ}  px={trans.transX} py={trans.transY} pz={trans.transZ} rx={trans.rotateX} ry={trans.rotateY} rz={trans.rotateZ} key={trans._id} />
             }
           })()
           ))
       }
 
-      {/* <Model url="/coffeecup.glb" sx={1} sy={1} sz={1}  px={0} py={0} pz={0} rx={0} ry={0} rz={0} />
-      <Model url="/tree.glb" sx={1} sy={1} sz={1}  px={0} py={0} pz={0} rx={0} ry={0} rz={0} /> */}
-      {/* <Model url="/vodoo.glb" sx={1} sy={1} sz={1}  px={0} py={0} pz={0} rx={0} ry={0} rz={0} /> */}
+      {
+        transformsproduct.map((trans) => (
+          // console.log(user?.result?._id),
+          // console.log( trans?.creator),
+          // console.log(trans.Objnum),
+          console.log(trans.creator),
+          console.log(selectedScene?._id),
+          (() => {
+            if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.objnum === 1 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.sceneId === trans?.sceneId) {
+              return <Model url="/tree.glb" sx={trans.scaleX} sy={trans.scaleY} sz={trans.scaleZ}  px={trans.transX} py={trans.transY} pz={trans.transZ} rx={trans.rotateX} ry={trans.rotateY} rz={trans.rotateZ} key={trans._id} />
+            }
+            else if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.objnum === 2 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.sceneId === trans?.sceneId) {
+              return <Model url="/coffeecup.glb" sx={trans.scaleX} sy={trans.scaleY} sz={trans.scaleZ}  px={trans.transX} py={trans.transY} pz={trans.transZ} rx={trans.rotateX} ry={trans.rotateY} rz={trans.rotateZ} key={trans._id} />
+            }
+            else if ((user?.result?.googleId === trans?.creator || user?.result?._id === trans?.creator) && trans.objnum === 3 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.sceneId === trans?.sceneId) {
+              return <Model url="/vodoo.glb" sx={trans.scaleX} sy={trans.scaleY} sz={trans.scaleZ}  px={trans.transX} py={trans.transY} pz={trans.transZ} rx={trans.rotateX} ry={trans.rotateY} rz={trans.rotateZ} key={trans._id} />
+            }
+          })()
+          ))
+      }
+
+      {/* <Model url="/coffeecup.glb" sx={0.235} sy={0.235} sz={0.235}  px={0} py={1} pz={0} rx={0} ry={0} rz={0} /> */}
+      {/* <Model url="/tree.glb" sx={2.50} sy={2.50} sz={2.50}  px={0} py={1} pz={0} rx={0} ry={0} rz={0} /> */}
+      {/* <Model url="/vodoo.glb" sx={0.35} sy={0.35} sz={0.35}  px={0} py={1} pz={0} rx={0} ry={180} rz={0} /> */}
 
       {target && <TransformControls object={target} mode={mode} />}
       <OrbitControls makeDefault />

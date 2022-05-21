@@ -10,5 +10,9 @@ export const TRANS = 'TRANS';
 export const TCREATE = 'TCREATE';
 export const TUPDATE = 'TUPDATE';
 
+export const TRANSPROD = 'TRANSPROD';
+export const TCREATEPROD = 'TCREATEPROD';
+export const TUPDATEPROD = 'TUPDATEPROD';
+
 export const VIEW = "VIEW";
 export const EDIT = "EDIT";

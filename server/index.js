@@ -6,6 +6,7 @@ import compression from 'compression';
 import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
 import posRoutes from './routes/transformModel.js';
+import posproductRoutes from './routes/productModel.js';
 
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(cors());
 app.use('/posts', postRoutes);
 app.use("/user", userRoutes);
 app.use("/pos", posRoutes);
+app.use("/posprod", posproductRoutes);
 
 const CONNECTION_URL = 'mongodb+srv://Oaky:12af7ooM@vewafdb.s4toy.mongodb.net/vewafdb';
 const PORT = process.env.PORT|| 5000;

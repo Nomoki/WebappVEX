@@ -1,13 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
 
-import PostMessage from '../models/postMessage.js';
+import SceneInfo from '../models/postMessage.js';
 
 const router = express.Router();
 
 export const getPosts = async (req, res) => { 
     try {
-        const postMessages = await PostMessage.find();
+        const postMessages = await SceneInfo.find();
                 
         res.status(200).json(postMessages);
     } catch (error) {
@@ -19,7 +19,7 @@ export const getPost = async (req, res) => {
     const { post_id } = req.params;
 
     try {
-        const post = await PostMessage.findById(post_id);
+        const post = await SceneInfo.findById(post_id);
         
         res.status(200).json(post);
     } catch (error) {
@@ -29,7 +29,7 @@ export const getPost = async (req, res) => {
 
 export const createPost = async (req, res) => {
     const post = req.body;
-    const newPostMessage = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString() });
+    const newPostMessage = new SceneInfo({ ...post, creator: req.userId, createdAt: new Date().toISOString() });
 
     try {
         await newPostMessage.save();
@@ -48,7 +48,7 @@ export const updatePost = async (req, res) => {
 
     const updatedPost = { creator, title, message, tags, selectedFile, _id: post_id };
 
-    await PostMessage.findByIdAndUpdate(post_id, updatedPost, { new: true });
+    await SceneInfo.findByIdAndUpdate(post_id, updatedPost, { new: true });
 
     res.json(updatedPost);
 }
@@ -58,7 +58,7 @@ export const deletePost = async (req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(post_id)) return res.status(404).send(`No post with id: ${post_id}`);
 
-    await PostMessage.findByIdAndRemove(post_id);
+    await SceneInfo.findByIdAndRemove(post_id);
 
     res.json({ message: "Post deleted successfully." });
 }
