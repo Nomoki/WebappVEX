@@ -37,6 +37,6 @@ export default makeStyles((theme) => ({
   cart: {
     width: '15%',
     height: '15%',
+    cursor: 'pointer'
   }
-
 }));
