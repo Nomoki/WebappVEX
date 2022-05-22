@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, VIEW, EDIT } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, VIEW, EDIT, STOCK } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
 export const getPosts = () => async (dispatch) => {
@@ -61,6 +61,18 @@ export const createView = (id, history) => async (dispatch) => {
     dispatch({ type: EDIT, payload: data });
 
     history.push('/exhibition');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const stockScene = (id, history) => async (dispatch) => {
+  try {
+     const { data } = await api.stockscene(id);
+
+    dispatch({ type: STOCK, payload: data });
+
+    history.push('/stock');
   } catch (error) {
     console.log(error);
   }

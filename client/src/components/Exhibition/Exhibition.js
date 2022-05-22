@@ -60,7 +60,7 @@ const Exhibition = ({ post }) => {
   const transformsproduct = useSelector((state) => state.transformsproduct);
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
-  const selectedScene = JSON.parse(localStorage.getItem('That scene'));
+  const selectedScene = JSON.parse(localStorage.getItem('selected edit scene'));
 
   useEffect(() => {
     dispatch(getTransforms());

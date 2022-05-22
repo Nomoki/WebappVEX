@@ -16,3 +16,5 @@ export const TUPDATEPROD = 'TUPDATEPROD';
 
 export const VIEW = "VIEW";
 export const EDIT = "EDIT";
+
+export const STOCK = "STOCK";

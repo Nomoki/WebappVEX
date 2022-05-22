@@ -11,6 +11,7 @@ const Profile = lazy(() => import('./components/Profile/Profile'));
 const Create = lazy(() => import('./components/Create/Create'));
 const Viewer = lazy(() => import('./components/viewer/Viewer'));
 const Cart = lazy(() => import('./components/Cart/Cart'));
+const Stock = lazy(() => import('./components/Stock/Stock'));
 
 const App = () => (
   <BrowserRouter>
@@ -26,6 +27,7 @@ const App = () => (
         <Route path="/create" exact render={props => <Create {...props} />} />
         <Route path="/viewer" exact render={props => <Viewer {...props} />} />
         <Route path="/cart" exact render={props => <Cart {...props} />} />
+        <Route path="/stock" exact render={props => <Stock {...props} />} />
       </Switch>
     </Container>
     </Suspense>

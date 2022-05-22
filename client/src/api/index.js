@@ -28,3 +28,5 @@ export const updateTrans = (id, updatedPosition) => API.patch(`/pos/${id}`, upda
 export const fetchTransformProduct = () => API.get('/posprod');
 export const createTransProduct = (newPosition) => API.post('/posprod', newPosition);
 export const updateTransProduct = (id, updatedPosition) => API.patch(`/posprod/${id}`, updatedPosition);
+
+export const stockscene = (id) => API.get(`/posts/${id}`);

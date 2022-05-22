@@ -58,7 +58,7 @@ const Item = styled(Paper)(({ theme }) => ({
 function Cart() {
   const classes = useStyles();
   const transformsproduct = useSelector((state) => state.transformsproduct);
-  const selectedScene = JSON.parse(localStorage.getItem('That scene'));
+  const selectedScene = JSON.parse(localStorage.getItem('selected view scene'));
 
   return(
   <>
@@ -119,7 +119,7 @@ const Viewer = () => {
   
 
   const user = JSON.parse(localStorage.getItem('profile'));
-  const selectedScene = JSON.parse(localStorage.getItem('That scene'));
+  const selectedScene = JSON.parse(localStorage.getItem('selected view scene'));
   
   useEffect(() => {
     dispatch(getTransforms());

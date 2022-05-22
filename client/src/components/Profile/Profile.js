@@ -54,6 +54,7 @@ const Profile = () => {
                 </div>
             </div>
             <div>
+                <br/>
                 <Grow in>
                     <Container>
                         <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
@@ -65,6 +66,7 @@ const Profile = () => {
             
                 </Grow>
             </div>
+            <br/>
             <Button variant="contained" color="Primary" className={classes.btncreate} onClick={() => {
                         history.push('/create')
                     }}>Create +</Button >
