@@ -12,4 +12,7 @@ canvas{
     border-radius: 15px;
     text-align: center;
     padding-top: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }

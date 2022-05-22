@@ -64,6 +64,7 @@ function Cart() {
   <>
   <div className = 'space'>
       <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }} alignItems="center" justify="center" className={classes.primarygrid}>
+          <Typography variant="h5">View {selectedScene?.title} Scene</Typography><br/>
             {
               transformsproduct.map((trans) => (
                 (() => {

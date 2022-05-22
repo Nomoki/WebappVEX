@@ -64,7 +64,7 @@ const Form = ({ currentId, setCurrentId }) => {
       dispatch(updateTransProd(currentId, { ...transData, name: user?.result?.name }));
       clear();
     }
-    history.push('/exhibition');
+    history.push('/explore');
   };
 
 

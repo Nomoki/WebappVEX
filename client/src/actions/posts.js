@@ -60,7 +60,7 @@ export const createView = (id, history) => async (dispatch) => {
 
     dispatch({ type: EDIT, payload: data });
 
-    history.push('/explore');
+    history.push('/exhibition');
   } catch (error) {
     console.log(error);
   }
