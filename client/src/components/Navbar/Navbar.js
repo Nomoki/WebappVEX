@@ -46,7 +46,7 @@ const Navbar = () => {
                 <Toolbar className={classes.toolbar}>
                     {user ? (
                         <>
-                        <img src={cart} className={classes.cart} />
+                        <img src={cart} className={classes.cart} onClick={() => history.push('/cart')}/>
                         <div className={classes.profile}>
                             <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl} onClick={() => history.push('/profile')}>{user.result.name.charAt(0)}</Avatar>
                             <Typography className={classes.userName} variant="h6" onClick={() => history.push('/profile')}>{user.result.name}</Typography>
