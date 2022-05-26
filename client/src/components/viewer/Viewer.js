@@ -17,6 +17,7 @@ import product2pic from '../Form/product2.jpg'
 import product3pic from '../Form/product3.png'
 import { getPosts } from '../../actions/posts'
 import { getTransformsProd } from '../../actions/transformsproduct'
+import Products from './Products/Products';
 
 
 
@@ -59,51 +60,19 @@ function Cart() {
   const classes = useStyles();
   const transformsproduct = useSelector((state) => state.transformsproduct);
   const selectedScene = JSON.parse(localStorage.getItem('selected view scene'));
+  const dispatch = useDispatch();
+  const [currentId, setCurrentId] = useState(0);
+
+  useEffect(() => {
+        dispatch(getTransformsProd());
+      }, [currentId, dispatch])
 
   return(
   <>
   <div className = 'space'>
       <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }} alignItems="center" justify="center" className={classes.primarygrid}>
           <Typography variant="h5">View {selectedScene?.title} Scene</Typography><br/>
-            {
-              transformsproduct.map((trans) => (
-                (() => {
-                  if (trans.objnum === 1 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.sceneId === trans?.sceneId) {
-                    return (
-                          <Grid item xs={12} >
-                            <Item>
-                              <Typography variant="h7">Product 1</Typography><br />
-                              <Button variant="text" color="primary" size="large" type="button" ><img src={product1pic} className={classes.picproduct1}/></Button><br/>
-                              <TextField id="standard-basic" label="Count" type="number"  />
-                            </Item>
-                          </Grid>
-                          )
-                  }
-                  else if (trans.objnum === 2 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.sceneId === trans?.sceneId) {
-                    return (
-                            <Grid item xs={12}>
-                              <Item>
-                                <Typography variant="h7">Product 2</Typography><br />
-                                <Button variant="text" color="primary" size="large" type="button"><img src={product2pic} className={classes.picproduct2}/></Button><br/>
-                                <TextField id="standard-basic" label="Count" type="number"  />
-                              </Item>
-                            </Grid>
-                            )
-                  }
-                  else if (trans.objnum === 3 && (selectedScene?.googleId === trans?.creator || selectedScene?.creator === trans?.creator) && selectedScene?.sceneId === trans?.sceneId) {
-                    return (
-                            <Grid item xs={12}>
-                              <Item>
-                                <Typography variant="h7">Product 3</Typography><br />
-                                <Button variant="text" color="primary" size="large" type="button"><img src={product3pic} className={classes.picproduct3}/></Button><br/>
-                                <TextField id="standard-basic" label="Count" type="number"  />
-                              </Item>
-                            </Grid>
-                            )
-                  }
-                })()
-              ))
-            }
+          <Products setCurrentId={setCurrentId}/>
       </Grid>
       <br/>
       <Button color='primary' variant='contained' className={classes.buttoncart}>Add Cart</Button>
