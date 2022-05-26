@@ -90,12 +90,13 @@ export const cartScene = (id, history) => async (dispatch) => {
   }
 };
 
-export const cartProduct = (id) => async (dispatch) => {
+export const cartProduct = (id, history) => async (dispatch) => {
   try {
      const { data } = await api.cartproduct(id);
 
     dispatch({ type: CART2, payload: data });
 
+    history.push('/cart');
   } catch (error) {
     console.log(error);
   }

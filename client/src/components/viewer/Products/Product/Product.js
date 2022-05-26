@@ -43,7 +43,7 @@ const Product = ({product, setCurrentId}) => {
         })()
         }
         <TextField id="standard-basic" label="Count" type="number"  />
-        <Button color='primary' variant='contained' className={classes.buttoncart} onClick={() => [dispatch(cartProduct(product._id)), dispatch(cartScene(selectedScene?._id, history))]}>Add Cart</Button>
+        <Button color='primary' variant='contained' className={classes.buttoncart} onClick={() => [dispatch(cartProduct(product._id, history)), dispatch(cartScene(selectedScene?._id, history))]}>Add Cart</Button>
       </Item>
       )
       }
