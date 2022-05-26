@@ -6,7 +6,8 @@ import product1pic from '../../../Form/product1.jpg'
 import product2pic from '../../../Form/product2.jpg'
 import product3pic from '../../../Form/product3.png'
 import { getTransformsProd } from '../../../../actions/transformsproduct'
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
+import { cartProduct, cartScene } from '../../../../actions/posts'
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -42,6 +43,7 @@ const Product = ({product, setCurrentId}) => {
         })()
         }
         <TextField id="standard-basic" label="Count" type="number"  />
+        <Button color='primary' variant='contained' className={classes.buttoncart} onClick={() => [dispatch(cartProduct(product._id)), dispatch(cartScene(selectedScene?._id, history))]}>Add Cart</Button>
       </Item>
       )
       }

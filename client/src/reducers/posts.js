@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, VIEW, EDIT, STOCK } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, VIEW, EDIT, STOCK, CART, CART2 } from '../constants/actionTypes';
 
 export default (posts = [], action) => {
   switch (action.type) {
@@ -20,6 +20,14 @@ export default (posts = [], action) => {
       return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
     case STOCK:
       localStorage.setItem('selected stock scene', JSON.stringify({ ...action?.payload }));
+  
+      return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
+    case CART:
+      localStorage.setItem('selected cart scene', JSON.stringify({ ...action?.payload }));
+  
+      return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
+    case CART2:
+      localStorage.setItem('selected cart product', JSON.stringify({ ...action?.payload }));
   
       return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
     default:

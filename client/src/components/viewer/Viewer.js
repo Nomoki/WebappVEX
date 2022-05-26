@@ -18,6 +18,8 @@ import product3pic from '../Form/product3.png'
 import { getPosts } from '../../actions/posts'
 import { getTransformsProd } from '../../actions/transformsproduct'
 import Products from './Products/Products';
+import { useHistory } from 'react-router-dom'
+import { cartScene } from '../../actions/posts'
 
 
 
@@ -62,6 +64,7 @@ function Cart() {
   const selectedScene = JSON.parse(localStorage.getItem('selected view scene'));
   const dispatch = useDispatch();
   const [currentId, setCurrentId] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
         dispatch(getTransformsProd());
@@ -75,7 +78,6 @@ function Cart() {
           <Products setCurrentId={setCurrentId}/>
       </Grid>
       <br/>
-      <Button color='primary' variant='contained' className={classes.buttoncart}>Add Cart</Button>
   </div>
   </>
   )

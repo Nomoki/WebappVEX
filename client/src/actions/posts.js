@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, VIEW, EDIT, STOCK } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, VIEW, EDIT, STOCK, CART, CART2 } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
 export const getPosts = () => async (dispatch) => {
@@ -73,6 +73,29 @@ export const stockScene = (id, history) => async (dispatch) => {
     dispatch({ type: STOCK, payload: data });
 
     history.push('/stock');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const cartScene = (id, history) => async (dispatch) => {
+  try {
+     const { data } = await api.cartscene(id);
+
+    dispatch({ type: CART, payload: data });
+
+    history.push('/cart');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const cartProduct = (id) => async (dispatch) => {
+  try {
+     const { data } = await api.cartproduct(id);
+
+    dispatch({ type: CART2, payload: data });
+
   } catch (error) {
     console.log(error);
   }

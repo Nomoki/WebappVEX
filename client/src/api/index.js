@@ -30,3 +30,5 @@ export const createTransProduct = (newPosition) => API.post('/posprod', newPosit
 export const updateTransProduct = (id, updatedPosition) => API.patch(`/posprod/${id}`, updatedPosition);
 
 export const stockscene = (id) => API.get(`/posts/${id}`);
+export const cartscene = (id) => API.get(`/posts/${id}`);
+export const cartproduct = (id) => API.get(`/posprod/${id}`);

@@ -18,3 +18,5 @@ export const VIEW = "VIEW";
 export const EDIT = "EDIT";
 
 export const STOCK = "STOCK";
+export const CART = "CART";
+export const CART2 = "CART2";
