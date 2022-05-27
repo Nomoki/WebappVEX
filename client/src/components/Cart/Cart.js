@@ -14,11 +14,22 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+
 const Cart = () => {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
   const selectedScene = JSON.parse(localStorage.getItem('selected cart scene'));
   const selectedProduct = JSON.parse(localStorage.getItem('selected cart product'));
+
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Please Sign In to see cart.
+        </Typography>
+      </Paper>
+    )
+  }
 
   return (
     <>

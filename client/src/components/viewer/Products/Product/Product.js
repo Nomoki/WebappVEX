@@ -22,6 +22,7 @@ const Product = ({product, setCurrentId}) => {
     const selectedScene = JSON.parse(localStorage.getItem('selected view scene'));
     const dispatch = useDispatch();
     const history = useHistory();
+    const user = JSON.parse(localStorage.getItem('profile'));
     
   return (
     <>
@@ -43,7 +44,9 @@ const Product = ({product, setCurrentId}) => {
         })()
         }
         <TextField id="standard-basic" label="Count" type="number"  />
+        {(!user?.result?.name) ? null :
         <Button color='primary' variant='contained' className={classes.buttoncart} onClick={() => [dispatch(cartProduct(product._id, history)), dispatch(cartScene(selectedScene?._id, history))]}>Add Cart</Button>
+        }
       </Item>
       )
       }

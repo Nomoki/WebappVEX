@@ -22,10 +22,21 @@ const Stock = () => {
     const selectedScene = JSON.parse(localStorage.getItem('selected stock scene'));
     const dispatch = useDispatch();
     const [currentId, setCurrentId] = useState(0);
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(() => {
         dispatch(getTransformsProd());
       }, [currentId, dispatch])
+
+      if (!user?.result?.name) {
+        return (
+          <Paper className={classes.paper}>
+            <Typography variant="h6" align="center">
+              Please Sign In to see stock.
+            </Typography>
+          </Paper>
+        )
+      }
 
   return (
     <>

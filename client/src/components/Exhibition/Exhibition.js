@@ -88,6 +88,7 @@ const Exhibition = ({ post }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
   const selectedScene = JSON.parse(localStorage.getItem('selected edit scene'));
+  const classes = useStyles();
 
   useEffect(() => {
     dispatch(getTransforms());
@@ -95,8 +96,15 @@ const Exhibition = ({ post }) => {
     dispatch(getTransformsProd());
   }, [dispatch])
 
-
-
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Please Sign In to edit workspace.
+        </Typography>
+      </Paper>
+    )
+  }
 
   return (
     <Fragment>

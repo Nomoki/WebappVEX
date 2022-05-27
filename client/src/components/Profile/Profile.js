@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 import * as actionType from '../../constants/actionTypes';
-import { Avatar, Typography, Container, Grow, Grid, Button } from '@material-ui/core';
+import { Avatar, Typography, Container, Grow, Grid, Button, Paper } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import useStyles from './styles';
 import { getPosts } from '../../actions/posts';
@@ -43,6 +43,18 @@ const Profile = () => {
 
         setUser(JSON.parse(localStorage.getItem('profile')))
     }, [location])
+
+
+    if (!user?.result?.name) {
+        return (
+          <Paper className={classes.paper}>
+            <Typography variant="h6" align="center">
+              Please Sign In to see profile.
+            </Typography>
+          </Paper>
+        )
+      }
+
     return (
         <Fragment>
             <div style={{ display: "flex", justifyContent: 'start', margin: '0', backgroundColor: "#aaaaaa"}}>
