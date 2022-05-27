@@ -25,7 +25,7 @@ const Cart = () => {
     return (
       <Paper className={classes.paper}>
         <Typography variant="h6" align="center">
-          Please Sign In to see cart.
+          Please Sign In to see.
         </Typography>
       </Paper>
     )
@@ -34,6 +34,7 @@ const Cart = () => {
   return (
     <>
     <div className={classes.til}><Typography variant="h4">{user?.result?.name} Cart</Typography></div>
+    { (!selectedScene?.title && !selectedProduct?.objnum) ? null :
     <Grid Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }} alignItems="center" justify="center" className={classes.primarygrid}>  
           <Grid item xs={12}>
             <Item className={classes.itemss}>
@@ -53,7 +54,9 @@ const Cart = () => {
                 }
             </Item>
         </Grid>
+    
       </Grid>
+    }
     </>
   )
 }
